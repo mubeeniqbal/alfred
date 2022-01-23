@@ -1,4 +1,4 @@
-# Alfred - A Discord Bot
+# Alfred - The Discord Butler
 
 Alfred is a bot for Discord implemented in discord.js.
 
