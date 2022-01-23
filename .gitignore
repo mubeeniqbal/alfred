@@ -1,6 +1,6 @@
-#########
-# Linux #
-#########
+##############################################################
+# Linux                                                     ##
+##############################################################
 
 *~
 
@@ -16,9 +16,9 @@
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
-#########
-# macOS #
-#########
+##############################################################
+# macOS                                                     ##
+##############################################################
 
 # General
 .DS_Store
@@ -48,9 +48,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-###########
-# Windows #
-###########
+##############################################################
+# Windows                                                   ##
+##############################################################
 
 # Windows thumbnail cache files
 Thumbs.db
@@ -77,9 +77,26 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-##########
-# NodeJS #
-##########
+##############################################################
+# Visual Studio Code                                        ##
+##############################################################
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+##############################################################
+# NodeJS                                                    ##
+##############################################################
 
 # Logs
 logs
