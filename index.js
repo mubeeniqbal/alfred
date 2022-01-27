@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Client, Intents } from 'discord.js';
 import fetch from 'node-fetch';
 
