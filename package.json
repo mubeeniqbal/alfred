@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Alfred is a bot for Discord implemented in discord.js.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
