@@ -1,5 +1,6 @@
 import { Client, Intents } from 'discord.js';
 import fetch from 'node-fetch';
+import { token } from './config.js';
 
 function getQuote() {
   return fetch('https://zenquotes.io/api/random')
@@ -46,4 +47,4 @@ client.on('messageCreate', async (message) => {
 });
 
 // Login to Discord with your client's token.
-client.login(process.env.TOKEN);
+client.login(token);
