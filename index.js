@@ -61,14 +61,14 @@ const cronOptions = {
 };
 
 // Send morning meeting message to lobby.
-cron.schedule('0 12 7 * * *', async () => {
+cron.schedule('10 10 * * *', async () => {
   const msg = '**Morning Meeting** :bell:\n It\'s time to show yo faces to each other. You washed \'em yet? :face_with_raised_eyebrow: Gather \'round!';
   console.log(msg);
   client.channels.cache.get(lobby).send(msg);
 }, cronOptions);
 
 // Send quote of the day to lobby.
-cron.schedule('10 12 7 * * *', async () => {
+cron.schedule('0 11 * * *', async () => {
   const quote = await getQuote();
   const msg = `**Today's Quote** :feather:\n> ${quote}`;
   console.log(msg);
@@ -76,7 +76,7 @@ cron.schedule('10 12 7 * * *', async () => {
 }, cronOptions);
 
 // Send lunch time message to lobby.
-cron.schedule('15 12 7 * * *', async () => {
+cron.schedule('0 14 * * *', async () => {
   const msg = '**Lunch Time** :fork_knife_plate:\n Hungry? It\'s time to eat food yo! :drooling_face:';
   console.log(msg);
   client.channels.cache.get(lobby).send(msg);
