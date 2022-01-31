@@ -1,8 +1,9 @@
 import { Client, Intents } from 'discord.js';
 import fetch from 'node-fetch';
-import { token } from './config.js';
+import cron from 'node-cron';
+import { token, lobby } from './config.js';
 
-function getQuote() {
+async function getQuote() {
   return fetch('https://zenquotes.io/api/random')
     .then((response) => response.json())
     .then((data) => `${data[0].q} -${data[0].a}`);
@@ -26,8 +27,10 @@ client.on('messageCreate', async (message) => {
   }
 
   if (message.content === '!inspire') {
-    getQuote().then((quote) => message.channel.send(quote));
-  }
+    const quote = await getQuote();
+    console.log(quote);
+    message.channel.send(quote);
+  } else
 
   if (message.content.startsWith('!slap ')) {
     let arg = message.content.split('!slap ')[1];
@@ -36,15 +39,45 @@ client.on('messageCreate', async (message) => {
       arg = await message.guild.members.fetch().catch(console.error);
     }
 
-    console.log(arg);
-    message.channel.send(`${message.author} slapped ${arg} :wave:`);
-  }
+    const msg = `${client.user} slapped ${arg} :wave:`;
+    console.log(msg);
+    message.channel.send(msg);
+  } else
 
   if (message.content.startsWith('!punch ')) {
     const arg = message.content.split('!punch ')[1];
-    message.channel.send(`${message.author} punched ${arg} :punch:`);
+    const msg = `${client.user} punched ${arg} :punch:`;
+    console.log(msg);
+    message.channel.send(msg);
   }
 });
 
 // Login to Discord with your client's token.
-client.login(token);
+await client.login(token);
+
+const cronOptions = {
+  scheduled: true,
+  timezone: 'Asia/Karachi',
+};
+
+// Send morning meeting message to lobby.
+cron.schedule('0 12 7 * * *', async () => {
+  const msg = '**Morning Meeting** :bell:\n It\'s time to show yo faces to each other. You washed \'em yet? :face_with_raised_eyebrow: Gather \'round!';
+  console.log(msg);
+  client.channels.cache.get(lobby).send(msg);
+}, cronOptions);
+
+// Send quote of the day to lobby.
+cron.schedule('10 12 7 * * *', async () => {
+  const quote = await getQuote();
+  const msg = `**Today's Quote** :feather:\n> ${quote}`;
+  console.log(msg);
+  client.channels.cache.get(lobby).send(msg);
+}, cronOptions);
+
+// Send lunch time message to lobby.
+cron.schedule('15 12 7 * * *', async () => {
+  const msg = '**Lunch Time** :fork_knife_plate:\n Hungry? It\'s time to eat food yo! :drooling_face:';
+  console.log(msg);
+  client.channels.cache.get(lobby).send(msg);
+}, cronOptions);
